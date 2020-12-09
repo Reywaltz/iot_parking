@@ -1,12 +1,8 @@
-from dataclasses import dataclass
-from typing import Optional
-
-import logging
-
 from fastapi import APIRouter, Body, HTTPException, WebSocket
-from sqlalchemy.sql.functions import mode
-from ..models import model
-from schemas.parking import Parking
+from app.internal.models import model
+from ..schemas.parking import Parking
+from app.apps.mock.consumer import consumer
+import json
 
 router = APIRouter()
 
@@ -21,7 +17,7 @@ async def get_by_id(id: int):
             return park_slot
     raise HTTPException(status_code=404, detail="No parking slot")
 
-def reserve_parking(parking: Parking):
+async def reserve_parking(parking: Parking):
 
     # cur = model.cursor
     # cur.execute(f"SELECT * FROM parking WHERE id={parking.id}")
@@ -55,8 +51,9 @@ def reserve_parking(parking: Parking):
 async def socket_test(websocket: WebSocket):
     await websocket.accept()
     while True:
-        data = await websocket.receive_text()
-        await websocket.send_text(f"Message text was: {data}")
+        # data = await websocket.receive_text()
+        for message in consumer:
+            await websocket.send_text(f"Message text was: {json.dumps(message.value)}")
 
 
 def create_routes():

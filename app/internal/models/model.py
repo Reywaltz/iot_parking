@@ -1,7 +1,10 @@
 from sqlalchemy import create_engine, Column, Integer, Boolean, Sequence
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base
+
 
 Base = declarative_base()
+
 engine = create_engine("postgresql://postgres:qwerty@localhost/test")
 
 Session = sessionmaker(bind=engine)

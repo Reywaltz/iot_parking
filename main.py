@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from fastapi import APIRouter
-from internal.routes.route import create_routes, router
+from app.apps.api.routes.route import create_routes, router
 from fastapi.middleware.cors import CORSMiddleware
-import subprocess
 
 app = FastAPI()
 

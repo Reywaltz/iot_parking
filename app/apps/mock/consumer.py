@@ -1,7 +1,6 @@
 from kafka import KafkaConsumer
-# from internal.models import model
 
-from ..internal.models import model
+from app.internal.models import model
 
 lst = model.session.query(model.Parking).all()
 print(lst)
@@ -12,5 +11,5 @@ consumer = KafkaConsumer(bootstrap_servers=['localhost:9092'],
 
 consumer.subscribe("iot")
 
-for msg in consumer:
-    print(msg)
+# for msg in consumer:
+#     print(msg)

@@ -1,5 +1,5 @@
 from kafka import KafkaProducer
-from internal.models import model
+from app.internal.models import model
 import time
 import json
 
@@ -15,8 +15,10 @@ print(producer)
 while True:
     print("send")
     lst = model.session.query(model.Parking).order_by(model.Parking.id).all()
-    for slot in lst:
-        data = {slot.id: slot.occupied}
-        msg = json.dumps(data).encode('UTF-8')
+    obj_dict = {x.id: x for x in lst}
+    print(obj_dict)
+    while True:
+        # data = {slot.id: slot.occupied}
+        msg = json.dumps(lst).encode('UTF-8')
         producer.send("iot", value=msg)
-        time.sleep(10)
+        time.sleep(1)
