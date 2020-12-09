@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=iot
+      - POSTGRES_PASSWORD=qwerty
+      - POSTGRES_DB=iot
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    restart: on-failure
