@@ -1,0 +1,11 @@
+click==7.1.2
+fastapi==0.62.0
+greenlet==0.4.17
+h11==0.11.0
+kafka-python==2.0.2
+psycopg2==2.8.6
+pydantic==1.7.3
+SQLAlchemy==1.4.0b1
+starlette==0.13.6
+uvicorn==0.13.0
+websockets==8.1
