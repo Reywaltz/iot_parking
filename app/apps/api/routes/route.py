@@ -6,7 +6,7 @@ import json
 router = APIRouter()
 
 async def get_all():
-    res = model.session.query(model.Parking).all()
+    res = model.session.query(model.Parking).order_by(model.Parking.id).all()
     return res
 
 async def get_by_id(id: int):
