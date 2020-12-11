@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, Boolean, Sequence
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import declarative_base, scoped_session
 
 
 Base = declarative_base()
@@ -19,16 +19,3 @@ class Parking(Base):
 
     def __repr__(self):
         return f"<Parking(id={self.id}, occupied={self.occupied})>"
-
-
-# import psycopg2
-
-# conn = psycopg2.connect(dbname="test", user="postgres", password="qwerty", host='localhost', port=5432)
-
-# cursor = conn.cursor()
-
-# cursor.execute("select * from parking")
-
-# data = cursor.fetchall()
-
-# # print(data)

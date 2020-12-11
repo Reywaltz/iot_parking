@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Body, HTTPException, WebSocket
 from app.internal.models import model
 from ..schemas.parking import Parking
-from app.apps.mock.consumer import consumer
 import json
 
 router = APIRouter()
@@ -48,13 +47,6 @@ async def reserve_parking(parking: Parking):
                 model.session.rollback()
     raise HTTPException(status_code=404, detail="No parking slot")
 
-async def socket_test(websocket: WebSocket):
-    await websocket.accept()
-    while True:
-        # data = await websocket.receive_text()
-        for message in consumer:
-            await websocket.send_text(f"Message text was: {json.dumps(message.value)}")
-
 
 def create_routes():
     router.add_api_route("/api/v1/parking", 
@@ -72,5 +64,3 @@ def create_routes():
                          methods=["PUT"],
                          tags=["Parking"])
 
-    router.add_websocket_route("/api/v1/websocket",
-                               socket_test)
